@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/gradle-plugin'
+        }
+        gradlePluginPortal()
+        maven{
+            url = 'https://maven.aliyun.com/nexus/content/repositories/central/'
+        }
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'application'
+    id 'idea'
+}
+
+version '1.0-SNAPSHONT'
+
+allprojects {
+    repositories {
+        maven {
+            url = 'https://maven.aliyun.com/nexus/content/repositories/central/'
+        }
+        mavenCentral()
+    }
+
+    group = 'com.aaron.leetcode'
+
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+}
+
+dependencies {
+    testImplementation(platform('org.junit:junit-bom:5.8.2'))
+	testImplementation('org.junit.jupiter:junit-jupiter')
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
